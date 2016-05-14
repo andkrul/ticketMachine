@@ -1,5 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div#counter
+    p Licczba kupowanych biletów
+    p Zwykłe: #[label#normalTicketCnt 0]   Ulgowe: #[label#studentTicketCnt 0]
+    p Do zapłaty
+  p Automat przyjumje nominiały:
+
+  p Ponadto, dla kwot większych od 7,60 PLN:
+
+  p #[button#normalnTicketBtn Bilet zwykły] #[button#buyBtn Bilet ulgowy]
+  p #[button#cancelBtn Anuluj] #[button#buyBtn Kupuj]
+
+  p MONETY   BANKTONOTY
+
+  P Pojemnik na bilety i resztę
+
+  script.
+    $( document ).ready(function() {
+      console.log( "ready!" );
+    });
