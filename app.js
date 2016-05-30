@@ -57,4 +57,22 @@ app.use(function(err, req, res, next) {
 });
 
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("dziala")
+});
+
+var moneySchema = mongoose.Schema({
+  nominal: Number,
+  count: Number
+});
+
+var Nominals = mongoose.model('Money', moneySchema);
+var fivePLN = new Nominals({nominal:5,count:10})
+
+console.log(fivePLN.count+" "+ fivePLN.nominal)
 module.exports = app;
