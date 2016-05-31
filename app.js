@@ -74,5 +74,6 @@ var moneySchema = mongoose.Schema({
 var Nominals = mongoose.model('Money', moneySchema);
 var fivePLN = new Nominals({nominal:5,count:10})
 
+fivePLN.save();
 console.log(fivePLN.count+" "+ fivePLN.nominal)
 module.exports = app;

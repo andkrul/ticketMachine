@@ -6,3 +6,196 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+.round-button  {
+  width: 50px;
+}
+.round-button-circlegr {
+  width: 100%;
+  height:0;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  border:5px solid #cfdcec;
+  overflow:hidden;
+
+  background: #7B7076;
+  box-shadow: 0 0 3px gray;
+}
+.round-button-circlegzl {
+  width: 100%;
+  height:0;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  border:5px solid #cfdcec;
+  overflow:hidden;
+
+  background: #988733;
+  box-shadow: 0 0 3px gray;
+}
+
+.round-button-circle:hover {
+  background:#7B7096;
+}
+.round-button a {
+  display:block;
+  float:left;
+  width:100%;
+  padding-top:50%;
+  padding-bottom:50%;
+  line-height:1em;
+  margin-top:-0.5em;
+
+  text-align:center;
+  color:#544C51;
+  font-family:Verdana;
+  font-size:1.2em;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+body
+{
+  margin: 0;
+  text-align: center;
+}
+
+.middle
+{
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 200px;
+  margin: -100px 0 0;
+}
+
+.slot
+{
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  background: #404647;
+  border-top: 5px solid #353A3B;
+  border-radius: 2px;
+}
+
+.slot:after
+{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  width: 60%;
+  height: 10px;
+  margin: -5px 0 0;
+  background: #17191A;
+  border-radius: 5px;
+  box-shadow: inset 0 -5px #222526;
+}
+
+.ticket
+{
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 25%;
+  width: 50%;
+  height: 140px;
+  line-height: 140px;
+  vertical-align: middle;
+  margin: -5px 0 0;
+  background: #C282C3;
+  text-decoration: none;
+}
+
+
+.ticket:after { left: 23px; }
+.ticket > b { left: 43px; }
+.ticket > em
+{
+  display: block;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  bottom: 25px;
+  left: 25px;
+  background: #B471B5;
+}
+
+.ticket > em > b, .ticket > em > c
+{
+  display: block;
+  position: relative;
+}
+
+.ticket > em > b:before, .ticket > em > b:after, .ticket > em :before, .ticket > em :after
+{
+  content: "";
+  display: block;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background: #C282C3;
+  border-radius: 100%;
+}
+
+.ticket > em > b:after
+{
+  left: auto;
+  right: -8px;
+}
+
+.ticket > em > c
+{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.ticket > em > c:after
+{
+  left: auto;
+  right: -8px;
+}
+
+.ticket > label
+{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: 140px;
+  height: 100px;
+  line-height: 100px;
+  vertical-align: middle;
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: rotate(90deg);
+  color: black;
+  font-weight: bold;
+  font-size: x-small;
+  cursor: pointer;
+}
+
+
+
+section.flat button {
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 15px 45px;
+    font-size: 48px;
+    font-family: "Bitter",serif;
+    line-height: 1;
+    appearance: none;
+    box-shadow: none;
+    border-radius: 0;
+    color: #fff;
+    background-color: #6496c8;
+    text-shadow: -1px 1px #417cb8;
+    border: none;
+}

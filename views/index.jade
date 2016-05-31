@@ -12,7 +12,20 @@ block content
     p #[button#10zlBtn(value='10.0',class='banknote') 10zł] #[button#20zlBtn(value='20.0',class='banknote') 20zł] #[button#50zlBtn(value='50.0',class='banknote') 50zł]
 
   p #[button#normalTicketBtn Bilet zwykły] #[button#studentTicketBtn Bilet ulgowy]
-  p #[button#cancelBtn Anuluj] #[button#buyBtn Kupuj]
+  section.flat
+    p #[button#cancelBtn Anuluj] #[button#buyBtn Kupuj]
+
+  div.round-button
+    div.round-button-circlegr
+      a 10gr
+
+  div.round-button
+    div.round-button-circlegr
+      a 20gr
+
+  div.round-button
+    div.round-button-circlegzl
+      a 2zl
 
   p MONETY
   input(type='number')
@@ -20,6 +33,12 @@ block content
   input(type='number')
 
   P Pojemnik na bilety i resztę
+
+  div.slot
+    a.ticket
+      em
+      label NORMALNY 3.80
+
 
   script.
     $( document ).ready(function() {
@@ -101,7 +120,9 @@ block content
         if(change > 0 && Nominals.length >= 2) {
           wydaj(oldChange,Nominals.slice(1,Nominals.length))
         } else {
+          if(change != 0){
           alert("Brak monet w automacie!")
+        }
         }
         if(change == 0){
           alert(result);
