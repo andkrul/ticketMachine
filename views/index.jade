@@ -23,15 +23,21 @@ block content
     div.slot
     div#rest
   script.
+
     var Nominals = [];
-    Nominals.push({nominal: 50, count: 2}, {nominal: 20, count: 10}, {nominal: 10, count: 6},
-            {nominal: 5, count: 1}, {nominal: 2, count: 3}, {nominal: 1, count: 3});
+    //TODO pobranie tego z bazy
+    function getNominals() {
+      Nominals.push({nominal: 50, count: 2}, {nominal: 20, count: 10}, {nominal: 10, count: 6},
+              {nominal: 5, count: 1}, {nominal: 2, count: 3}, {nominal: 1, count: 3});
+    }
     var UserCash = [];
     UserCash.push({nominal: 50, count: 0}, {nominal: 20, count: 0}, {nominal: 10, count: 0},
             {nominal: 5, count: 0}, {nominal: 2, count: 0},{nominal: 1, count: 0},{nominal: 0.5, count: 0},{nominal: 0.2, count: 0},{nominal: 0.1, count: 0});
     var Change = [];
     Change.push({nominal: 50, count: 0}, {nominal: 20, count: 0}, {nominal: 10, count: 0},
             {nominal: 5, count: 0}, {nominal: 2, count: 0},{nominal: 1, count: 0},{nominal: 0.5, count: 0},{nominal: 0.2, count: 0},{nominal: 0.1, count: 0});
+
+    getNominals();
 
 
 
@@ -43,6 +49,7 @@ block content
 
       //Click on the buy button
       $("#buyBtn").click(function () {
+        if($("#normalTicketCnt").html()*1 + $("#studentTicketCnt").html()*1 > 0){
         $('#messages').addClass("confirm");
         $('#tickets :input').attr("disabled", true);
         $('#coins :input').attr("disabled", false);
@@ -50,7 +57,7 @@ block content
         if ($('#moneyToPay').html() > 7.6) {
           $('.banknote').attr("disabled", false);
           return;
-        }
+        }}
       });
 
       //Handles counters incrementations
@@ -84,14 +91,22 @@ block content
       //Cancel a transaction
       $("#cancelBtn").click(function(){
         giveMoneyBack(UserCash);
+
+        $("#moneyToPay").html(0);
+        $('#tickets :input').attr("disabled", false);
+        clearMessage();
+        $('#coins :input').attr("disabled", true);
+      });
+
+      function  clearMessage(){
+        $('#messages').html("Do zapłaty: <label id='moneyToPay'></label>");
+        $('#messages').removeClass();
         $("#normalTicketCnt").html(0);
         $("#studentTicketCnt").html(0);
         $("#moneyToPay").html(0);
         $('#tickets :input').attr("disabled", false);
-        $('#messages').html("Do zapłaty: <label id='moneyToPay'></label>");
         $('#coins :input').attr("disabled", true);
-      });
-
+      }
 
       $("#cash").on('click', 'button', function(){
         var nominal =$(this).val();
@@ -128,6 +143,17 @@ block content
 
       }
 
+      function addClearBtn(){
+        $('#rest').append("<button id='clearBtn'> zabierz bilety i reszte</button>");
+        $('#clearBtn').click(function () {
+          getNominals();
+          $('#rest').html('');
+          clearMessage();
+        })
+
+      }
+
+
       function wydaj(change, Nominals){
         var oldChange = change;
         var i = 0;
@@ -151,6 +177,7 @@ block content
           $('#messages').addClass("succes");
           giveMoneyBack(Change);
           printTickets();
+          addClearBtn();
         }
         else  {
           $('#messages').html("Brak monet w automacie");
