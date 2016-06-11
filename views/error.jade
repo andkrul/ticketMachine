@@ -1,6 +1,150 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  div#counter
+    p Licczba kupowanych biletów
+    p Zwykłe: #[label#normalTicketCnt 0]   Ulgowe: #[label#studentTicketCnt 0]
+    p Do zapłaty #[label#moneyToPay]
+  p Automat przyjumje nominiały:
+  div#coins
+    p #[button#10grBtn(value='0.1') 10gr] #[button#20grBtn(value='0.2') 20gr] #[button#50grBtn(value='0.5') 50gr] #[button#1zlBtn(value='1.0') 1zł] #[button#2zlBtn(value='2.0') 2zł] #[button#5zlBtn(value='5.0') 5zł]
+    p Ponadto, dla kwot większych od 7,60 PLN:
+    p #[button#10zlBtn(value='10.0',class='banknote') 10zł] #[button#20zlBtn(value='20.0',class='banknote') 20zł] #[button#50zlBtn(value='50.0',class='banknote') 50zł]
+
+
+  p #[button#normalTicketBtn Bilet zwykły] #[button#studentTicketBtn Bilet ulgowy]
+  section.flat
+    p #[button#cancelBtn Anuluj] #[button#buyBtn Kupuj]
+
+  div.round-button
+    div.round-button-circle
+      a 10gr
+
+  div.round-button
+    div.round-button-circle
+      a 20gr
+
+  div.round-button
+    div.round-button-circle
+      a 2zl
+
+
+  p MONETY
+  input(type='number')
+  p BANKTONOTY
+  input(type='number')
+
+  P Pojemnik na bilety i resztę
+
+  a.ticket
+    em
+    label NORMALNY 3.80
+  div.slot
+    a.ticket
+      em
+      label NORMALNY 3.80
+
+
+  script.
+    $( document ).ready(function() {
+
+
+
+      //Adding normal tickets
+      $("#normalTicketBtn").click(function(){
+        if(checkTickets()) {
+          $("#normalTicketCnt").html(function (i, val) {
+            return val * 1 + 1
+          })
+          calculateMoneyToPay();
+        } else {
+          alert("Za dużo biletów!")
+        }
+      });
+
+      //Adding student tickets
+      $("#studentTicketBtn").click(function () {
+        if(checkTickets()) {
+          $("#studentTicketCnt").html(function (i, val) {
+            return val * 1 + 1
+          })
+          calculateMoneyToPay();
+        } else {
+          alert("Za dużo biletów!")
+        }
+      });
+
+      var checkCartoons = function(Cartoons){
+        if(Cartoons.count == 0) {
+          alert("Brak kartoników!")
+        }
+        if(Cartoons.count < ticketSum()) {
+          alert("Możesz kupić tylko " + Cartoons.count + " biletów");
+        }
+      }
+      //Checks amount of tickets
+      var checkTickets = function(){
+        if(ticketSum() >= 15){
+          return false
+        } else {
+          return true
+        }
+      };
+
+      var ticketSum = function() {
+        return $("#normalTicketCnt").html()*1 + $("#studentTicketCnt").html()*1;
+      }
+
+      var calculateMoneyToPay = function(){
+        $("#moneyToPay").html((parseFloat($("#normalTicketCnt").html()*3.8 + $("#studentTicketCnt").html()*2)).toFixed(2))
+      };
+
+      $("#cancelBtn").click(function(){
+        $("#normalTicketCnt").html(0);
+        $("#studentTicketCnt").html(0);
+        $("#moneyToPay").html(0);
+      });
+
+      $("#coins").on('click', 'button', function(){
+        if($('#moneyToPay').html() < 7.6 && $(this).attr('class')=='banknote'){
+          alert("7.6!!!!");
+          return;
+        }
+        $('#moneyToPay').html((parseFloat($('#moneyToPay').html() - $(this).val()).toFixed(2)));
+        var change = $('#moneyToPay').html();
+        var Nominals = [];
+        Nominals.push({nominal: 50, count: 2}, {nominal: 20, count: 10}, {nominal: 10, count: 6},
+                {nominal: 5, count: 1}, {nominal: 2, count: 3});
+        if($('#moneyToPay').html() <= 0) {
+          wydaj(Math.abs(change),Nominals);
+        };
+      });
+
+
+      function wydaj(change, Nominals){
+        var oldChange = change;
+        var i = 0;
+        var result = "Change is:\r\n";
+        while(i<Nominals.length) {
+          if(change >= Nominals[i].nominal) {
+
+            P=Math.floor(change/Nominals[i].nominal);
+            if(P <= Nominals[i].count) {
+              change = Math.round(100 * (change - (Nominals[i].nominal * P))) / 100;
+              result += Nominals[i].nominal + " PLN x " + P + "\r\n";
+            }
+          }
+          i++;
+        }
+        if(change > 0 && Nominals.length >= 2) {
+          wydaj(oldChange,Nominals.slice(1,Nominals.length))
+        } else {
+          if(change != 0){
+            alert("Brak monet w automacie!")
+          }
+        }
+        if(change == 0){
+          alert(result);
+        }
+      };
+    });
