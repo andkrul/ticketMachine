@@ -188,6 +188,14 @@ body
   width: 200px;
 }
 
+img{
+  float: right;
+  width: 100px; /* you can use % */
+  height: auto;
+}
+.counter{
+  font-size: 60px;
+}
 .banknote[disabled=disabled], .banknote:disabled {
   background-color: #f7da64;
 }

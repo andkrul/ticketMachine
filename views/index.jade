@@ -96,6 +96,7 @@ block content
         $('#tickets :input').attr("disabled", false);
         clearMessage();
         $('#coins :input').attr("disabled", true);
+        addClearBtn();
       });
 
       function  clearMessage(){
@@ -135,22 +136,21 @@ block content
         var normalCnt =$('#normalTicketCnt').html();
         var studentCnt =$('#studentTicketCnt').html();
         if(normalCnt>0){
-          $('#rest').append("<button class='ticket normal'>Bilet normalny<br>3.80zł</button>"+normalCnt);
+          $('#rest').append("<button class='ticket normal'>Bilet normalny<br>3.80zł</button>"+"<label class=counter>X"+normalCnt+"</label>");
         }
-        if(studentCnt>0){
-          $('#rest').append("<button class='ticket student'>Bilet ulgowy<br>1.90zł</button>"+studentCnt);
+        if (studentCnt > 0) {
+          $('#rest').append("<button class='ticket student'>Bilet ulgowy<br>1.90zł</button>" + "<label class=counter>x" + studentCnt + "</label>");
         }
 
       }
 
-      function addClearBtn(){
-        $('#rest').append("<button id='clearBtn'> zabierz bilety i reszte</button>");
+      function addClearBtn() {
+        $('#rest').append("<div style='float: right;'><a href=''><img src='http://localhost:3000/images/hand.png' id='clearBtn'></a>  ></div>");
         $('#clearBtn').click(function () {
           getNominals();
           $('#rest').html('');
           clearMessage();
         })
-
       }
 
 
