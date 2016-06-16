@@ -90,16 +90,24 @@ block content
 
       //Cancel a transaction
       $("#cancelBtn").click(function(){
-        giveMoneyBack(UserCash);
+        var normalCnt = $('#normalTicketCnt').html();
+        var studentCnt = $('#studentTicketCnt').html();
+        if (normalCnt + studentCnt > 0 && !($('#clearBtn').length)) {
 
-        $("#moneyToPay").html(0);
-        $('#tickets :input').attr("disabled", false);
-        clearMessage();
-        $('#coins :input').attr("disabled", true);
-        addClearBtn();
+          $("#moneyToPay").html(0);
+          $('#tickets :input').attr("disabled", false);
+          clearMessage();
+          $('#coins :input').attr("disabled", true);
+          if(UserCash.some(function(item){
+                 return item.count != 0;
+                  })) {
+            addClearBtn();
+            giveMoneyBack(UserCash);
+          }
+        }
       });
 
-      function  clearMessage(){
+      function clearMessage(){
         $('#messages').html("Do zapłaty: <label id='moneyToPay'></label>");
         $('#messages').removeClass();
         $("#normalTicketCnt").html(0);
@@ -145,7 +153,7 @@ block content
       }
 
       function addClearBtn() {
-        $('#rest').append("<div style='float: right;'><a href=''><img src='http://localhost:3000/images/hand.png' id='clearBtn'></a>  ></div>");
+        $('#rest').append("<div style='float: right;'><a href=''><img src='http://localhost:3000/images/hand.png' id='clearBtn'></a></div>");
         $('#clearBtn').click(function () {
           getNominals();
           $('#rest').html('');
@@ -184,6 +192,7 @@ block content
           $('#messages').removeClass();
           $('#messages').addClass("alert");
           giveMoneyBack(UserCash);
+          addClearBtn();
         }
 
       };
