@@ -13,13 +13,11 @@ var app = express();
 var Nominal ;
 app.get("/nominals", function(req, res) {
 
-  Nominal.find({}, function(err, users) {
-    if (err) throw err;
-
-    // object of all the users
-    console.log(users);
+  var cash =[];
+  Nominal.find({}, function(err, item) {
+    res.send(item);
   });
-  res.send(nominals);
+
 });
 
 // view engine setup
@@ -84,25 +82,25 @@ db.once('open', function() {
 
    Nominal = mongoose.model('Money', moneySchema, "mongoose_demo");
 
-//Insert data
-  var gr10 = new Nominal({nominal:0.1,count:5});
-  gr10.save();
-  var gr20 = new Nominal({nominal:0.2,count:7});
-  gr20.save();
-  var gr50 = new Nominal({nominal:0.5,count:6});
-  gr50.save();
-  var zl1 = new Nominal({nominal:1,count:10});
-  zl1.save();
-  var zl2 = new Nominal({nominal:2,count:4});
-  zl2.save();
-  var zl5 = new Nominal({nominal:5,count:5});
-  zl5.save();
-  var zl10 = new Nominal({nominal:10,count:3});
-  zl10.save();
-  var zl20 = new Nominal({nominal:20,count:7});
-  zl20.save();
-  var zl50 = new Nominal({nominal:50,count:2});
-  zl50.save();
+// //Insert data
+//   var gr10 = new Nominal({nominal:0.1,count:5});
+//   gr10.save();
+//   var gr20 = new Nominal({nominal:0.2,count:7});
+//   gr20.save();
+//   var gr50 = new Nominal({nominal:0.5,count:6});
+//   gr50.save();
+//   var zl1 = new Nominal({nominal:1,count:10});
+//   zl1.save();
+//   var zl2 = new Nominal({nominal:2,count:4});
+//   zl2.save();
+//   var zl5 = new Nominal({nominal:5,count:5});
+//   zl5.save();
+//   var zl10 = new Nominal({nominal:10,count:3});
+//   zl10.save();
+//   var zl20 = new Nominal({nominal:20,count:7});
+//   zl20.save();
+//   var zl50 = new Nominal({nominal:50,count:2});
+//   zl50.save();
 
 
 });
