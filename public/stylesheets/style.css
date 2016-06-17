@@ -8,7 +8,8 @@ body
   margin: 10px 10px 10px 10px;
   padding: 10px 10px 10px 10px;
   display: inline-block;
-  max-width: 600px;
+  max-width: 808px;
+
   background: rgb(235, 240, 245);
   border: black;
   border-style: solid;
@@ -65,7 +66,7 @@ body
 }
 
 
-.btn-circle10gr {
+.btn-circle01 {
   width: 30px;
   height: 30px;
   text-align: center;
@@ -75,7 +76,7 @@ body
   border-radius: 15px;
 }
 
-.btn-circle20gr {
+.btn-circle02 {
   width: 40px;
   height: 40px;
   text-align: center;
@@ -85,7 +86,7 @@ body
   border-radius: 20px;
 }
 
-.btn-circle50gr {
+.btn-circle05 {
   width: 50px;
   height: 50px;
   text-align: center;
@@ -95,7 +96,7 @@ body
   border-radius: 25px;
 }
 
-.btn-circle1zl {
+.btn-circle1 {
   width: 60px;
   height: 60px;
   text-align: center;
@@ -105,7 +106,7 @@ body
   border-radius: 30px;
 }
 
-.btn-circle2zl {
+.btn-circle2 {
   width: 60px;
   height: 60px;
   text-align: center;
@@ -116,7 +117,7 @@ body
 }
 
 
-.btn-circle5zl {
+.btn-circle5 {
   width: 70px;
   height: 70px;
   text-align: center;
@@ -210,19 +211,43 @@ img{
   text-transform: uppercase;
 }
 
-.tenzl{
+.btn-circle10{
   height: 60px;
   width: 120px;
+  font-family: Helvetica;
+  border: none;
+  font-size: 20px;
+  line-height: 1.214;
+  color: #000000;
+  margin: 0;
+  padding: 15px;
+  text-transform: uppercase;
 }
 
-.twentyzl{
+.btn-circle20{
   height:  65px;
+  font-family: Helvetica;
+  border: none;
+  font-size: 20px;
+  line-height: 1.214;
+  color: #000000;
+  margin: 0;
+  padding: 15px;
+  text-transform: uppercase;
   width: 130px;
 }
 
-.fiftyzl{
+.btn-circle50{
   height:  70px;
   width: 140px;
+  font-family: Helvetica;
+  border: none;
+  font-size: 20px;
+  line-height: 1.214;
+  color: #000000;
+  margin: 0;
+  padding: 15px;
+  text-transform: uppercase;
 }
 .slot
 {

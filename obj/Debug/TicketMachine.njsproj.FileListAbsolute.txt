@@ -1,0 +1,2 @@
+I:\PK\ZTPO\Projekt\ticketMachine\bin\Microsoft.NodejsTools.WebRole.dll
+I:\PK\ZTPO\Projekt\ticketMachine\obj\Debug\TicketMachine.njsprojResolveAssemblyReference.cache

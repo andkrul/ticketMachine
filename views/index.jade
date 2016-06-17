@@ -9,10 +9,10 @@ block content
     p Automat przyjumje nominiały:
     div#cash
       div#coins
-        p #[button#10grBtn.btn-circle10gr(value='0.1') 10gr] #[button#20grBtn.btn-circle20gr(value='0.2') 20gr] #[button#50grBtn.btn-circle50gr(value='0.5') 50gr] #[button#1zlBtn.btn-circle1zl(value='1.0') 1zł] #[button#2zlBtn.btn-circle2zl(value='2.0') 2zł] #[button#5zlBtn.btn-circle5zl(value='5.0') 5zł]
+        p #[button#10grBtn.btn-circle01(value='0.1') 10gr] #[button#20grBtn.btn-circle05(value='0.2') 20gr] #[button#50grBtn.btn-circle05(value='0.5') 50gr] #[button#1zlBtn.btn-circle1(value='1.0') 1zł] #[button#2zlBtn.btn-circle2(value='2.0') 2zł] #[button#5zlBtn.btn-circle5(value='5.0') 5zł]
         p Ponadto, dla kwot większych od 7,60 PLN:
 
-      p #[button.tenzl#10zlBtn(value='10.0',class='banknote') 10zł] #[button.twentyzl#20zlBtn(value='20.0',class='banknote') 20zł] #[button.fiftyzl#50zlBtn(value='50.0',class='banknote') 50zł]
+      p #[button.btn-circle10#10zlBtn(value='10.0',class='banknote') 10zł] #[button.btn-circle20#20zlBtn(value='20.0',class='banknote') 20zł] #[button.btn-circle50#50zlBtn(value='50.0',class='banknote') 50zł]
 
     div#tickets
       p #[button#normalTicketBtn.ticket.normal Bilet zwykły<br/>3.80zł] #[button#studentTicketBtn.ticket.student Bilet ulgowy<br/>1.90zł]
@@ -27,8 +27,11 @@ block content
     var Nominals = [];
     //TODO pobranie tego z bazy
     function getNominals() {
-      Nominals.push({nominal: 50, count: 2}, {nominal: 20, count: 10}, {nominal: 10, count: 6},
-              {nominal: 5, count: 1}, {nominal: 2, count: 3}, {nominal: 1, count: 3});
+      $.get('/nominals', function (data) {
+        $.each(data, function () {
+          Nominals.push({nominal:this.nominal,count:this.count})
+        });
+      });
     }
     var UserCash = [];
     UserCash.push({nominal: 50, count: 0}, {nominal: 20, count: 0}, {nominal: 10, count: 0},
@@ -136,7 +139,7 @@ block content
 
       function addCashToRest(item){
         for (i = 0; i < item.count; i++) {
-          $('#rest').append("<button id='2zlBtn' value='2.0' class='btn-circle2zl'>"+item.nominal+"</button>");
+          $('#rest').append("<button  class='btn-circle"+item.nominal.toString().replace('.','')+"'>"+item.nominal+"</button>");
         }
       }
 
@@ -144,10 +147,10 @@ block content
         var normalCnt =$('#normalTicketCnt').html();
         var studentCnt =$('#studentTicketCnt').html();
         if(normalCnt>0){
-          $('#rest').append("<button class='ticket normal'>Bilet normalny<br>3.80zł</button>"+"<label class=counter>X"+normalCnt+"</label>");
+          $('#rest').append("<div><button class='ticket normal'>Bilet normalny<br>3.80zł</button>"+"<label class=counter>X"+normalCnt+"</label></div>");
         }
         if (studentCnt > 0) {
-          $('#rest').append("<button class='ticket student'>Bilet ulgowy<br>1.90zł</button>" + "<label class=counter>x" + studentCnt + "</label>");
+          $('#rest').append("<div><button class='ticket student'>Bilet ulgowy<br>1.90zł</button>" + "<label class=counter>x" + studentCnt + "</label></div>");
         }
 
       }
